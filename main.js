@@ -12,10 +12,15 @@ bot.on('ready', () => {
 bot.on("guildMemberAdd", (guild, member) => {
     let new_members = member.user.id;
     console.log(`${new_members} new member has joined ${guild.name}`);
-});
 
-bot.on('getDMChannel', (new_members) => {
-    console.log('got it');
+bot.getDMChannel(new_members) 
+    .then(result => {
+        console.log(result);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
 });
 
 bot.connect(); 
