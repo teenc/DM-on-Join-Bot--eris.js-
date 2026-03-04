@@ -8,19 +8,27 @@ bot.on('ready', () => {
     console.log('bot ready');
 });
 
+const embed = {
+    description: "**Discord:** <@938889096804319303>\n**Telegram:** https://t.me/snipies",
+    color: 0x101010,
+    footer: { text: 'hello world' }
+}
 
-bot.on("guildMemberAdd", (guild, member) => {
-    let new_members = member.user.id;
-    console.log(`${new_members} new member has joined ${guild.name}`);
+bot.on("guildMemberAdd", async (guild, member) => {
+    const userID = member.user.id;
+    const guildID = '1413406229534871554'
 
-bot.getDMChannel(new_members) 
-    .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error(error);
-    });
+    console.log(`${userID} new member has joined ${guildID}`);
 
+    try {
+        const dm = await bot.getDMChannel(userID) 
+        await dm.createMessage({embed})
+
+        await bot.kickGuildMember(guildID, userID, 'not allowed.')
+        console.log(`${userID} kicked from ${guildID}`);
+    } catch (error){
+        console.error(`${userID} new member has joined ${guildID}:`, error);
+    }
 });
-
+        
 bot.connect(); 
