@@ -2,7 +2,6 @@
 1. run 'npm install dotenv'
 2. run 'npm install eris'
 3. make an '.env' in the same dir
-4. replace the guildID with your server's id
 
 then run boi
 
